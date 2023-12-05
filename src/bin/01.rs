@@ -51,12 +51,12 @@ fn get_first_last_number_concat_sum(line: &str) -> u32 {
 }
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let result = input.lines().map(|line| get_first_last_digit_concat_sum(line)).sum();
+    let result = input.lines().map(get_first_last_digit_concat_sum).sum();
     Some(result)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let result = input.lines().map(|line| get_first_last_number_concat_sum(line)).sum();
+    let result = input.lines().map(get_first_last_number_concat_sum).sum();
     Some(result)
 }
 
@@ -67,7 +67,7 @@ mod tests {
     #[test]
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result.unwrap(), 142);
+        assert_eq!(result.unwrap(), 220);
     }
 
     #[test]
