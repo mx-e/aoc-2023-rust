@@ -11,6 +11,7 @@ const LINE_LENGTH: i32 = 140;
 const DIR_OFFSET: [i32; 8] = [
     -LINE_LENGTH-1, -LINE_LENGTH, -LINE_LENGTH+1,-1, 1,LINE_LENGTH-1, LINE_LENGTH, LINE_LENGTH+1
 ];
+const MAX_NUM_LENGTH: usize = 5;
 
 fn get_digit_mask(line: &str, digit_pos: usize, m_start: usize, m_end: usize) -> [i32; 8] {
     let mut mask = [1; 8];
@@ -98,6 +99,7 @@ fn check_surr_nums(line: &str, sym_pos: usize, num_matches: &Vec<Match>)-> u64{
     .filter(|(i, _)| surr_mask[*i] == 1)
     .collect::<Vec<(usize, usize)>>();
     let matches: Vec<&Match> = num_matches.iter()
+    .filter(|m| (sym_pos-LINE_LENGTH as usize - MAX_NUM_LENGTH) < m.start()  && (sym_pos+LINE_LENGTH as usize+MAX_NUM_LENGTH) > m.end())
     .filter(|m| surr_idx.iter().any(
         |(_, idx)| *idx >= m.start() && *idx < m.end())
     )
