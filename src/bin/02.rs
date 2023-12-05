@@ -2,12 +2,9 @@
 advent_of_code::solution!(2);
 const COLOR_NAMES: [&str; 3] = ["red", "green", "blue"];
 
-
 fn extract_color_numbers_and_id (line: &str) -> (u32, [u32; 3]) {
-    let id_str = line.split(":").next().unwrap();
-    let id = id_str[id_str.len()-2..]
-        .trim()
-        .parse::<u32>()
+    let id = line.split_once(":")
+        .unwrap().0.split_once(" ").unwrap().1 .parse::<u32>()
         .unwrap();
     let mut max_color: [u32; 3] = [0,0,0];
     for (i, color) in COLOR_NAMES.iter().enumerate() {
